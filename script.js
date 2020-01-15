@@ -4,11 +4,11 @@
  * */
 
 class MyArray {
-    constructor() {
-        for (let i = 0; i < arguments.length; i++) {
-            this[i] = arguments[i];
+    constructor(...args) {
+        for (let i = 0; i < args.length; i++) {
+            this[i] = args[i];
         };
-        this.length = arguments.length;
+        this.length = args.length;
     }
 
     push(valueToAdd) {
@@ -20,7 +20,7 @@ class MyArray {
         const arrMap = new MyArray();
 
         for (let i = 0; i < this.length; i++) {
-            let value = func(this[i]);
+            const value = func(this[i]);
             arrMap.push(value);
         }
         return arrMap;
@@ -37,18 +37,11 @@ class MyArray {
         return arrFilter;
     }
 
-    reduce(func, sum) {
-        let firstValue = 0;
-
+    reduce(func, acc) {
         for (let i = 0; i < this.length; i++) {
-            if (i === 0) {
-                firstValue = func(sum, this[i]);
-                var value = firstValue;
-            } else {
-                value = func(value, this[i]);
-            }
+            acc = func(acc, this[i]);
         };
-        return value;
+        return acc;
     }
 
     includes(valueToFind) {
@@ -62,6 +55,7 @@ class MyArray {
 }
 
 const arr1 = new MyArray(1, 2, -3, 4, 5);
+console.log(arr1);
 
 arr1.push(100);
 console.log(arr1);
