@@ -11,9 +11,11 @@ class MyArray {
         this.length = args.length;
     }
 
-    push(valueToAdd) {
-        this[this.length] = valueToAdd;
-        this.length++;
+    push(...args) {
+        for (let i = 0; i < args.length; i++) {
+            this[this.length] = args[i];
+            this.length++;
+        };
     }
 
     map(func) {
@@ -57,7 +59,7 @@ class MyArray {
 const arr1 = new MyArray(1, 2, -3, 4, 5);
 console.log(arr1);
 
-arr1.push(100);
+arr1.push(100, 200, 300);
 console.log(arr1);
 
 const arrFilter = arr1.filter(function (item) {
